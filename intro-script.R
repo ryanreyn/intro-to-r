@@ -103,7 +103,7 @@ mean(first.vector)
 #We can also index vectors to look at specific elements. RStudio is a language that helpfully starts its counting from 1 to be more compatible with how we count (other languages like Python start from 0 and are more computer oriented). Indexing in RStudio is done using a pair of brackets, []. Let's look at some of the elements of the vector we made ourselves
 
 print(first.vector[1])
-print(first.vecotr[5])
+print(first.vector[5])
 
 #One convenient shorthand in RStudio is that we can index the last element of a vector using a negative index, specifically -1. You can use other negative numbers to index backwards (e.g., -2 would index the second to last element) but people typically only use this for the last element
 print(first.vector[-1])
@@ -150,6 +150,42 @@ iris%>%
 #You can store these filtered sets (or "slices") as a variable to do further work on too.
 setosa<-iris%>%
   filter(Species=="setosa")
+
+
+# Basic input/output ----
+#--------------------------------#
+
+#If you have done some processing to a dataset and want to save it for later you can do so as follows:
+write.table(setosa, file='setosa.tsv')
+#or as a comma-separated file:
+write.csv(setosa, file="setosa.csv")
+
+#To read these files back in later:
+test<-read.table("setosa.tsv")
+#Or:
+test<-read.csv("setosa.csv", row.names = 1)
+
+#If desired the entire workspace can be saved as follows:
+save.image("workspace.RData")
+#and reloaded:
+load("workspace.RData")
+
+
+# Documentation ----
+#--------------------------------#
+
+#Notice the use of the row.names=1 option for the read.csv command, this uses the first column of the saved csv file as the row names for the imported dataset.
+#To see documentation for any command, use a '?' prepending the command name as follows:
+?read.csv
+
+
+# Basic plotting ----
+#--------------------------------#
+
+#R offers a number of options for plotting, many of which will be reviewed later in the course.  To produce a simple scatter plot, the 'plot' command can be used.
+#For simple scatter plot of sepal width vs sepal length from the setosa/iris dataset we can run:
+plot(setosa$Sepal.Width, setosa$Sepal.Length, main="Width vs. Length", xlab="Sepal width", ylab="Sepal Length")
+
 
 # Basic if and for loops, as well as logical statements ----
 #--------------------------------#
